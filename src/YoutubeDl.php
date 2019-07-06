@@ -200,7 +200,7 @@ class YoutubeDl
                 /*
                   max-filesize band-aid fix
                 */
-                if(!$file || $file == null || file === null)
+                if(!$file || $file == null || $file === null)
                 {
                   throw new YoutubeDlException('Max filesize.');
                 }
