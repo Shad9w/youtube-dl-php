@@ -196,6 +196,15 @@ class YoutubeDl
         if (!isset($this->options['skip-download']) || false === $this->options['skip-download']) {
             if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
                 $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
+
+                /*
+                  max-filesize band-aid fix
+                */
+                if(!$file || $file == null || file === null)
+                {
+                  throw new YoutubeDlException('Max filesize.');
+                }
+
                 $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
             } elseif (isset($this->options['recode-video'])) {
                 $file = $this->findFile($videoData['_filename'], implode('|', self::RECODE_VIDEO_FORMATS));
